@@ -3,9 +3,39 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.539
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{E44285B0-790D-4111-A869-540721C903C5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Monaco.Core", "Monaco.Core\Monaco.Core.csproj", "{00856710-3363-465B-9D56-D2551A5511EB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{3A736742-4396-4567-ACE7-F8D59D52FBC2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentations", "Presentations", "{C0835AE5-BE8B-4787-B8F1-16DAE7013EA0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{E5050021-DA01-4A0C-B2D5-6864EDA957BB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Monaco.WebAPI", "Monaco.WebAPI\Monaco.WebAPI.csproj", "{187FDC97-CEC2-4D47-985B-41685D452E4D}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{00856710-3363-465B-9D56-D2551A5511EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00856710-3363-465B-9D56-D2551A5511EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00856710-3363-465B-9D56-D2551A5511EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00856710-3363-465B-9D56-D2551A5511EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{187FDC97-CEC2-4D47-985B-41685D452E4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{187FDC97-CEC2-4D47-985B-41685D452E4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{187FDC97-CEC2-4D47-985B-41685D452E4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{187FDC97-CEC2-4D47-985B-41685D452E4D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{00856710-3363-465B-9D56-D2551A5511EB} = {E44285B0-790D-4111-A869-540721C903C5}
+		{187FDC97-CEC2-4D47-985B-41685D452E4D} = {C0835AE5-BE8B-4787-B8F1-16DAE7013EA0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F259B4FC-50E7-4125-9B03-F8FA65D9DD15}
