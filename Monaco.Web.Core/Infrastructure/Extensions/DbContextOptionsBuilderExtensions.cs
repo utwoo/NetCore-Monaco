@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Monaco.Core.Configuration;
 
 namespace Monaco.Web.Core.Infrastructure.Extensions
 {
@@ -16,11 +16,11 @@ namespace Monaco.Web.Core.Infrastructure.Extensions
         /// <param name="services">Collection of service descriptors</param>
         public static void UsePostgreSQLServer(this DbContextOptionsBuilder optionsBuilder, IServiceCollection services)
         {
-            var config = services.BuildServiceProvider().GetRequiredService<ApplicationConfiguration>();
+            var appConfig = services.BuildServiceProvider().GetRequiredService<IConfiguration>();
 
             //TODO: config sql server setting with datasetting and configuration file.
             optionsBuilder
-                .UseNpgsql(config.ConnectionString);
+                .UseNpgsql(appConfig["Data:ConnectionString"]);
         }
     }
 }

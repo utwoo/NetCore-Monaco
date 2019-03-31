@@ -5,7 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.3" />
+    <ProjectReference Include="..\Monaco.Core\Monaco.Core.csproj" />
+    <ProjectReference Include="..\Monaco.Data.Core\Monaco.Data.Core.csproj" />
   </ItemGroup>
 
 </Project>

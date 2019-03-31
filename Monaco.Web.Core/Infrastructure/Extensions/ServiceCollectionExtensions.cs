@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Monaco.Data.DbContexts;
+using Monaco.Data.Core.DbContexts;
 
 namespace Monaco.Web.Core.Infrastructure.Extensions
 {
@@ -12,7 +12,7 @@ namespace Monaco.Web.Core.Infrastructure.Extensions
         /// Register base object context
         /// </summary>
         /// <param name="services">Collection of service descriptors</param>
-        public static void AddMonzaObjectContext(this IServiceCollection services)
+        public static void AddMonacoDbContext(this IServiceCollection services)
         {
             services.AddDbContext<MonacoDbContext>(optionsBuilder =>
             {

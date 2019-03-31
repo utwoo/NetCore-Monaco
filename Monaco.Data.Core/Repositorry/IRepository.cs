@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Monaco.Data.Entities;
+using Monaco.Data.Core.Entities;
 
-namespace Monaco.Core.Repositories
+namespace Monaco.Data.Core.Repositories
 {
     /// <summary>
     /// Represents an entity repository

@@ -1,4 +1,4 @@
-﻿namespace Monaco.WebAPI.Models
+﻿namespace Monaco.Web.Models
 {
     public class SampleDTO
     {

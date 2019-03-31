@@ -259,3 +259,7 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+
+# Customer
+/Monaco.Web/appsettings.json
+/Monaco.Web/appsettings.Development.json

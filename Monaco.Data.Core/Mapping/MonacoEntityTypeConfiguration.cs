@@ -1,9 +1,8 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Monaco.Data.Entities;
+using Monaco.Data.Core.Entities;
 
-namespace Monaco.Data.Mapping
+namespace Monaco.Data.Core.Mapping
 {
     /// <summary>
     /// Represents base entity mapping configuration

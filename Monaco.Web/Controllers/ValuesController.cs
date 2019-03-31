@@ -1,19 +1,23 @@
 ﻿using System.Collections.Generic;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Monaco.WebAPI.Models;
+using Monaco.Data.Core.DbContexts;
+using Monaco.Web.Models;
 
-namespace Monaco.WebAPI.Controllers
+namespace Monaco.Web.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class ValuesController : ControllerBase
     {
+        private readonly MonacoDbContext _context;
         private readonly IMapper _mapper;
 
         public ValuesController(
+           MonacoDbContext context,
            IMapper mapper)
         {
+            this._context = context;
             this._mapper = mapper;
         }
 

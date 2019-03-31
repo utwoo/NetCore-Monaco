@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace Monaco.Data.Mapping
+namespace Monaco.Data.Core.Mapping
 {
     /// <summary>
     /// Represents database context model mapping configuration

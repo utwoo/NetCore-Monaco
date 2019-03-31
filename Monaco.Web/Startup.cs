@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Monaco.Web.Core.Infrastructure.Extensions;
 
 namespace Monaco.WebAPI
 {
@@ -21,6 +22,8 @@ namespace Monaco.WebAPI
         {
             // Register AutoMapper
             services.AddAutoMapper();
+            // Register DataBase Context
+            services.AddMonacoDbContext();
             // Register MVC
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }

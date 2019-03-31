@@ -2,9 +2,9 @@
 using System.Linq;
 using System.Reflection;
 using Microsoft.EntityFrameworkCore;
-using Monaco.Data.Mapping;
+using Monaco.Data.Core.Mapping;
 
-namespace Monaco.Data.DbContexts
+namespace Monaco.Data.Core.DbContexts
 {
     /// <summary>
     /// Represents base object context
@@ -18,8 +18,9 @@ namespace Monaco.Data.DbContexts
         #region Utilities
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //dynamically load all entity and query type configurations
-            var typesConfigurations = Assembly.GetExecutingAssembly().GetTypes().Where(type =>
+            // dynamically load all entity and query type configurations
+            // TODO: HardCode(Monaco.Data)
+            var typesConfigurations = Assembly.Load("Monaco.Data").GetTypes().Where(type =>
                 (type.BaseType?.IsGenericType ?? false)
                     && (type.BaseType.GetGenericTypeDefinition() == typeof(MonacoEntityTypeConfiguration<>)));
 
