@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Monaco.WebAPI.Models;
 
 namespace Monaco.WebAPI.Controllers
 {
@@ -7,6 +9,14 @@ namespace Monaco.WebAPI.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
+        private readonly IMapper _mapper;
+
+        public ValuesController(
+           IMapper mapper)
+        {
+            this._mapper = mapper;
+        }
+
         // GET api/values
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
@@ -16,9 +26,10 @@ namespace Monaco.WebAPI.Controllers
 
         // GET api/values/5
         [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
+        public ActionResult<SampleDTO> Get(int id)
         {
-            return "value";
+            var sample = new Sample() { Value = 11 };
+            return _mapper.Map<Sample, SampleDTO>(sample);
         }
 
         // POST api/values
