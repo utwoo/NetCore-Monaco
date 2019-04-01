@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Monaco.Data.Core.DbContexts;
 using Monaco.Web.Models;
 
@@ -10,13 +11,16 @@ namespace Monaco.Web.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
+        private readonly ILogger<ValuesController> _logger;
         private readonly MonacoDbContext _context;
         private readonly IMapper _mapper;
 
         public ValuesController(
+           ILogger<ValuesController> logger,
            MonacoDbContext context,
            IMapper mapper)
         {
+            this._logger = logger;
             this._context = context;
             this._mapper = mapper;
         }
@@ -25,6 +29,7 @@ namespace Monaco.Web.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
         {
+            _logger.LogInformation("ValuesController-GET");
             return new string[] { "value1", "value2" };
         }
 

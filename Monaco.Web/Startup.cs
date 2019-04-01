@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -21,7 +20,7 @@ namespace Monaco.WebAPI
         public void ConfigureServices(IServiceCollection services)
         {
             // Register AutoMapper
-            services.AddAutoMapper();
+            services.AddMonacoMapper();
             // Register DataBase Context
             services.AddMonacoDbContext();
             // Register MVC
