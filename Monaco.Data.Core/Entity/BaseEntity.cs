@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Monaco.Data.Core.Entities
 {
@@ -7,7 +8,7 @@ namespace Monaco.Data.Core.Entities
     /// </summary>
     public abstract class BaseEntity
     {
-        [Column("FID")]
-        public int Id { get; set; }
+        [Column("FUID")]
+        public Guid Id { get; set; }
     }
 }

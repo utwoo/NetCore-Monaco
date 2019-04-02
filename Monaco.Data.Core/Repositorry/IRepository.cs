@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Monaco.Data.Core.Entities;
 
 namespace Monaco.Data.Core.Repositories
@@ -14,7 +15,7 @@ namespace Monaco.Data.Core.Repositories
         /// </summary>
         /// <param name="id">Identifier</param>
         /// <returns>Entity</returns>
-        TEntity GetById(int id);
+        TEntity GetById(Guid id);
 
         /// <summary>
         /// Insert entity

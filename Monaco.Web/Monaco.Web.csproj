@@ -12,6 +12,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Monaco.Core\Monaco.Core.csproj" />
+    <ProjectReference Include="..\Monaco.Data.Core\Monaco.Data.Core.csproj" />
+    <ProjectReference Include="..\Monaco.Data\Monaco.Data.csproj" />
+    <ProjectReference Include="..\Monaco.Domain\Monaco.Domain.csproj" />
     <ProjectReference Include="..\Monaco.Web.Core\Monaco.Web.Core.csproj" />
   </ItemGroup>
 

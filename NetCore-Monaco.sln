@@ -7,9 +7,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{E44285
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Monaco.Core", "Monaco.Core\Monaco.Core.csproj", "{00856710-3363-465B-9D56-D2551A5511EB}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domains", "Domains", "{3A736742-4396-4567-ACE7-F8D59D52FBC2}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{3A736742-4396-4567-ACE7-F8D59D52FBC2}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentations", "Presentations", "{C0835AE5-BE8B-4787-B8F1-16DAE7013EA0}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{C0835AE5-BE8B-4787-B8F1-16DAE7013EA0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{E5050021-DA01-4A0C-B2D5-6864EDA957BB}"
 EndProject
@@ -17,11 +17,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Monaco.Web.Core", "Monaco.W
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{FF1DD1A9-E24E-4814-A96F-F113D362CAA3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Monaco.Data.Core", "Monaco.Data.Core\Monaco.Data.Core.csproj", "{1D431FA1-9323-4C61-87DD-FF7C0F04776D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Monaco.Data.Core", "Monaco.Data.Core\Monaco.Data.Core.csproj", "{1D431FA1-9323-4C61-87DD-FF7C0F04776D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Monaco.Web", "Monaco.Web\Monaco.Web.csproj", "{2EB55ACA-CF3A-4DD8-BF7E-291334A68E66}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Monaco.Data", "Monaco.Data\Monaco.Data.csproj", "{CBA2030E-C266-4A91-B407-78C888017F8B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Monaco.Data", "Monaco.Data\Monaco.Data.csproj", "{CBA2030E-C266-4A91-B407-78C888017F8B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Monaco.Domain", "Monaco.Domain\Monaco.Domain.csproj", "{1A12C24F-119A-41D5-9AD7-8041F0814871}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,6 +51,10 @@ Global
 		{CBA2030E-C266-4A91-B407-78C888017F8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CBA2030E-C266-4A91-B407-78C888017F8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CBA2030E-C266-4A91-B407-78C888017F8B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A12C24F-119A-41D5-9AD7-8041F0814871}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A12C24F-119A-41D5-9AD7-8041F0814871}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A12C24F-119A-41D5-9AD7-8041F0814871}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A12C24F-119A-41D5-9AD7-8041F0814871}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -59,6 +65,7 @@ Global
 		{1D431FA1-9323-4C61-87DD-FF7C0F04776D} = {FF1DD1A9-E24E-4814-A96F-F113D362CAA3}
 		{2EB55ACA-CF3A-4DD8-BF7E-291334A68E66} = {C0835AE5-BE8B-4787-B8F1-16DAE7013EA0}
 		{CBA2030E-C266-4A91-B407-78C888017F8B} = {FF1DD1A9-E24E-4814-A96F-F113D362CAA3}
+		{1A12C24F-119A-41D5-9AD7-8041F0814871} = {3A736742-4396-4567-ACE7-F8D59D52FBC2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F259B4FC-50E7-4125-9B03-F8FA65D9DD15}

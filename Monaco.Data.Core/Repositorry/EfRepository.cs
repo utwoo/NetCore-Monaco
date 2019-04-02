@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Monaco.Data.Core.DbContexts;
 using Monaco.Data.Core.Entities;
 
@@ -13,11 +14,20 @@ namespace Monaco.Data.Core.Repositories
     public class EfRepository<TEntity> : IRepository<TEntity> where TEntity : BaseEntity
     {
         private readonly DbContext _context;
-        private DbSet<TEntity> _entities => _entities ?? _context.Set<TEntity>();
+        private readonly DbSet<TEntity> _entities;
+        private readonly ILogger<EfRepository<TEntity>> _logger;
 
-        public EfRepository(MonacoDbContext context)
+        /// <summary>
+        /// Gets an entity set
+        /// </summary>
+        protected virtual DbSet<TEntity> Entities => _entities ?? _context.Set<TEntity>();
+
+        public EfRepository(
+            MonacoDbContext context,
+            ILogger<EfRepository<TEntity>> logger)
         {
             this._context = context;
+            this._logger = logger;
         }
 
         /// <summary>
@@ -25,9 +35,9 @@ namespace Monaco.Data.Core.Repositories
         /// </summary>
         /// <param name="id">Identifier</param>
         /// <returns>Entity</returns>
-        public TEntity GetById(int id)
+        public TEntity GetById(Guid id)
         {
-            return _entities.Find(id);
+            return Entities.Find(id);
         }
 
         /// <summary>
@@ -39,7 +49,7 @@ namespace Monaco.Data.Core.Repositories
             if (entity == null)
                 throw new ArgumentNullException(nameof(entity));
 
-            _entities.Add(entity);
+            Entities.Add(entity);
             _context.SaveChanges();
         }
 
@@ -52,7 +62,7 @@ namespace Monaco.Data.Core.Repositories
             if (entities == null)
                 throw new ArgumentNullException(nameof(entities));
 
-            _entities.AddRange(entities);
+            Entities.AddRange(entities);
             _context.SaveChanges();
         }
 
@@ -65,7 +75,7 @@ namespace Monaco.Data.Core.Repositories
             if (entity == null)
                 throw new ArgumentNullException(nameof(entity));
 
-            _entities.Update(entity);
+            Entities.Update(entity);
             _context.SaveChanges();
         }
 
@@ -78,7 +88,7 @@ namespace Monaco.Data.Core.Repositories
             if (entities == null)
                 throw new ArgumentNullException(nameof(entities));
 
-            _entities.UpdateRange(entities);
+            Entities.UpdateRange(entities);
             _context.SaveChanges();
         }
 
@@ -91,7 +101,7 @@ namespace Monaco.Data.Core.Repositories
             if (entity == null)
                 throw new ArgumentNullException(nameof(entity));
 
-            _entities.Remove(entity);
+            Entities.Remove(entity);
             _context.SaveChanges();
         }
 
@@ -104,7 +114,7 @@ namespace Monaco.Data.Core.Repositories
             if (entities == null)
                 throw new ArgumentNullException(nameof(entities));
 
-            _entities.RemoveRange(entities);
+            Entities.RemoveRange(entities);
             _context.SaveChanges();
         }
     }

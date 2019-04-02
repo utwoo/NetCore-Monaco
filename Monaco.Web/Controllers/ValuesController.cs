@@ -34,7 +34,8 @@ namespace Monaco.Web.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
         {
-            _logger.LogInformation("ValuesController-GET");
+            this._context.Database.EnsureCreated();
+            this._class.Insert(new Class { Name = "11", ClassNo = 1, GradeNo = 1 });
             return new string[] { "value1", "value2" };
         }
 
