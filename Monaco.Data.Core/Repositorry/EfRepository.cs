@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using Monaco.Data.Core.DbContexts;
 using Monaco.Data.Core.Entities;
 
 namespace Monaco.Data.Core.Repositories
@@ -14,7 +15,7 @@ namespace Monaco.Data.Core.Repositories
         private readonly DbContext _context;
         private DbSet<TEntity> _entities => _entities ?? _context.Set<TEntity>();
 
-        public EfRepository(DbContext context)
+        public EfRepository(MonacoDbContext context)
         {
             this._context = context;
         }

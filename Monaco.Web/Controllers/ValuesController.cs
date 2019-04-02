@@ -3,6 +3,8 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Monaco.Data.Core.DbContexts;
+using Monaco.Data.Core.Repositories;
+using Monaco.Data.Test;
 using Monaco.Web.Models;
 
 namespace Monaco.Web.Controllers
@@ -11,15 +13,18 @@ namespace Monaco.Web.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
+        private readonly IRepository<Class> _class;
         private readonly ILogger<ValuesController> _logger;
         private readonly MonacoDbContext _context;
         private readonly IMapper _mapper;
 
         public ValuesController(
-           ILogger<ValuesController> logger,
-           MonacoDbContext context,
-           IMapper mapper)
+        IRepository<Class> @class,
+        ILogger<ValuesController> logger,
+        MonacoDbContext context,
+        IMapper mapper)
         {
+            this._class = @class;
             this._logger = logger;
             this._context = context;
             this._mapper = mapper;

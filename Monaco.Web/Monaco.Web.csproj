@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Monaco.Core\Monaco.Core.csproj" />
     <ProjectReference Include="..\Monaco.Web.Core\Monaco.Web.Core.csproj" />
   </ItemGroup>
 

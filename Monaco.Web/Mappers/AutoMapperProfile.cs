@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Monaco.Web.Models;
 
-namespace Monaco.Web.Infrastructure.Mapper
+namespace Monaco.Web.Mappers
 {
     public class AutoMapperProfile : Profile
     {

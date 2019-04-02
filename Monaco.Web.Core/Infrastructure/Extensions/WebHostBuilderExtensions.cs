@@ -9,16 +9,16 @@ namespace Monaco.Web.Core.Infrastructure.Extensions
     public static class WebHostBuilderExtensions
     {
         /// <summary>
-        /// Register object-object mapper
+        /// Use Serilog for structured application logging.
         /// </summary>
-        /// <param name="services">Collection of service descriptors</param>
+        /// <param name="hostBuilder">the web host builder to configure</param>
         public static IWebHostBuilder UseSEQSerilog(this IWebHostBuilder hostBuilder)
         {
-            // Use AutoMapper for object-object mapper
             hostBuilder.UseSerilog((hostingContext, loggerConfiguration) =>
                     loggerConfiguration
                         .ReadFrom.Configuration(hostingContext.Configuration)
                         .Enrich.FromLogContext()
+                        .WriteTo.ColoredConsole()
                         .WriteTo.Seq(
                             serverUrl: hostingContext.Configuration["SEQ:Server"],
                             apiKey: hostingContext.Configuration["SEQ:APIKey"]));
