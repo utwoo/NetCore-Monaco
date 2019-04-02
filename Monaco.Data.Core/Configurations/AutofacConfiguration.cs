@@ -1,9 +1,9 @@
 ﻿using Autofac;
-using Monaco.Data.Core.Repositories;
+using Monaco.Data.Core.Repository;
 
-namespace Monaco.Data.Core
+namespace Monaco.Data.Core.Configurations
 {
-    public class AutofacModule : Module
+    public class AutofacConfiguration : Module
     {
         protected override void Load(ContainerBuilder builder)
         {

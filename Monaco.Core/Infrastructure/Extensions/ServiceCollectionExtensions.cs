@@ -4,12 +4,11 @@ using System.Reflection;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using AutoMapper;
-using Microsoft.EntityFrameworkCore;
+using MassTransit;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Monaco.Data.Core.DbContexts;
 
-namespace Monaco.Web.Core.Infrastructure.Extensions
+namespace Monaco.Core.Infrastructure.Extensions
 {
     /// <summary>
     /// Represents extensions of IServiceCollection
@@ -20,16 +19,14 @@ namespace Monaco.Web.Core.Infrastructure.Extensions
         /// Register Autofac IOC container 
         /// </summary>
         /// <param name="services">Collection of service descriptors</param>
-        public static IServiceProvider AddMonacoAutoFac(this IServiceCollection services)
+        /// <param name="configuration">Application configuration</param>
+        public static IServiceProvider AddMonacoAutoFac(this IServiceCollection services, IConfiguration configuration)
         {
             // Create the container builder.
             var builder = new ContainerBuilder();
-
-            // Resolve application configration
-            var appConfig = services.BuildServiceProvider().GetRequiredService<IConfiguration>();
             // Read Assemblies for Autofac from configuration
             var assemblies =
-                appConfig["Autofac:LoadAssemblies"]
+                configuration["Autofac:LoadAssemblies"]
                     .Split(';')
                     .Select(name => Assembly.Load(name))
                     .ToArray();
@@ -52,17 +49,25 @@ namespace Monaco.Web.Core.Infrastructure.Extensions
         }
 
         /// <summary>
-        /// Register database context
+        /// Register RabbitMQ Connection by MassTransit
         /// </summary>
         /// <param name="services">Collection of service descriptors</param>
-        public static void AddMonacoDbContext(this IServiceCollection services)
+        /// <param name="configuration">Application configuration</param>
+        public static void AddMonacoRabbitMQ(this IServiceCollection services, IConfiguration configuration)
         {
-            // Resolve application configration
-            var appConfig = services.BuildServiceProvider().GetRequiredService<IConfiguration>();
-            // Register database context from application configuration
-            services.AddDbContext<MonacoDbContext>(optionsBuilder =>
+            services.AddMassTransit(config =>
             {
-                optionsBuilder.UseNpgsql(appConfig["Data:ConnectionString"]);
+                config.AddBus(context =>
+                {
+                    return Bus.Factory.CreateUsingRabbitMq(server =>
+                    {
+                        server.Host(new Uri(configuration["RabbitMQ:Server"]), host =>
+                        {
+                            host.Username(configuration["RabbitMQ:Username"]);
+                            host.Password(configuration["RabbitMQ:Password"]);
+                        });
+                    });
+                });
             });
         }
     }

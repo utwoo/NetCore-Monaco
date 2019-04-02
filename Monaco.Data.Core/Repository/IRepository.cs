@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Monaco.Data.Core.Entities;
 
-namespace Monaco.Data.Core.Repositories
+namespace Monaco.Data.Core.Repository
 {
     /// <summary>
     /// Represents an entity repository
@@ -21,7 +21,7 @@ namespace Monaco.Data.Core.Repositories
         /// Insert entity
         /// </summary>
         /// <param name="entity">Entity</param>
-        void Insert(TEntity entity);
+        TEntity Insert(TEntity entity);
 
         /// <summary>
         /// Insert entities
