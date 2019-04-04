@@ -4,6 +4,7 @@ using AutoMapper;
 using MassTransit;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Monaco.Core.EventPublishers;
 using Monaco.Data.Core.DbContexts;
 using Monaco.Data.Core.Repository;
 using Monaco.Data.Test;
@@ -19,20 +20,20 @@ namespace Monaco.Web.Controllers
         private readonly ILogger<ValuesController> _logger;
         private readonly MonacoDbContext _context;
         private readonly IMapper _mapper;
-        private readonly IBusControl _busControl;
+        private readonly IEventPublisher _eventPublisher;
 
         public ValuesController(
         IRepository<Class> @class,
         ILogger<ValuesController> logger,
         MonacoDbContext context,
         IMapper mapper,
-        IBusControl busControl)
+        IEventPublisher eventPublisher)
         {
             this._class = @class;
             this._logger = logger;
             this._context = context;
             this._mapper = mapper;
-            this._busControl = busControl;
+            this._eventPublisher = eventPublisher;
         }
 
         // GET api/values
@@ -40,7 +41,7 @@ namespace Monaco.Web.Controllers
         public ActionResult<IEnumerable<string>> Get()
         {
             using (TransactionScope trans = new TransactionScope())
-            { 
+            {
                 //var result = this._class.Insert(new Class { Name = "11", ClassNo = 1, GradeNo = 1 });
                 trans.Complete();
             }
@@ -53,7 +54,7 @@ namespace Monaco.Web.Controllers
         public ActionResult<SampleDTO> Get(int id)
         {
             var sample = new Sample() { Value = 11 };
-            this._busControl.Publish<Sample>(sample);
+            this._eventPublisher.Publish(sample);
             return _mapper.Map<Sample, SampleDTO>(sample);
         }
 

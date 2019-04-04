@@ -49,16 +49,18 @@ namespace Monaco.Core.Infrastructure.Extensions
         }
 
         /// <summary>
-        /// Register RabbitMQ Connection by MassTransit
+        /// Register RabbitMQ
         /// </summary>
         /// <param name="services">Collection of service descriptors</param>
         /// <param name="configuration">Application configuration</param>
         public static void AddMonacoRabbitMQ(this IServiceCollection services, IConfiguration configuration)
         {
+            // Register MassTransit component
             services.AddMassTransit(config =>
             {
                 config.AddBus(context =>
                 {
+                    // Create bus control by factory method
                     return Bus.Factory.CreateUsingRabbitMq(server =>
                     {
                         server.Host(new Uri(configuration["RabbitMQ:Server"]), host =>

@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
 using Monaco.Web.Models;
 
-namespace Monaco.Web.Mappers.Configurations
+namespace Monaco.Web.Mappers.Settings
 {
-    public class MapperConfiguration : Profile
+    public class MapperSetting : Profile
     {
-        public MapperConfiguration()
+        public MapperSetting()
         {
             CreateMap<Sample, SampleDTO>()
                 .ForMember(d => d.SomeValue, opt => opt.MapFrom(s => s.Value + 10));
