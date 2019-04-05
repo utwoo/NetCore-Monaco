@@ -1,9 +1,12 @@
-﻿using Autofac;
-using Monaco.Core.EventPublishers;
+﻿using System;
+using Autofac;
+using MassTransit;
+using MassTransit.AutofacIntegration;
+using Monaco.Core.EventPublisher;
 
 namespace Monaco.Core.Settings
 {
-    public class AutofacSetting : Module
+    public class AutofacModule : Module
     {
         protected override void Load(ContainerBuilder builder)
         {

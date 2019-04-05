@@ -1,4 +1,4 @@
-﻿namespace Monaco.Core.EventPublishers
+﻿namespace Monaco.Core.EventPublisher
 {
     public interface IEventPublisher
     {

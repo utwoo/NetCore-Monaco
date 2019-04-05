@@ -3,9 +3,9 @@ using Monaco.Web.Models;
 
 namespace Monaco.Web.Mappers.Settings
 {
-    public class MapperSetting : Profile
+    public class MapperProfile : Profile
     {
-        public MapperSetting()
+        public MapperProfile()
         {
             CreateMap<Sample, SampleDTO>()
                 .ForMember(d => d.SomeValue, opt => opt.MapFrom(s => s.Value + 10));

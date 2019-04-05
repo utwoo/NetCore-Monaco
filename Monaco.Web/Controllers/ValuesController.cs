@@ -4,7 +4,7 @@ using AutoMapper;
 using MassTransit;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Monaco.Core.EventPublishers;
+using Monaco.Core.EventPublisher;
 using Monaco.Data.Core.DbContexts;
 using Monaco.Data.Core.Repository;
 using Monaco.Data.Test;

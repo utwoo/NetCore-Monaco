@@ -27,8 +27,6 @@ namespace Monaco.WebAPI
             services.AddMonacoDbContext(Configuration);
             // Register MVC
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-            // Register RabbitMQ
-            services.AddMonacoRabbitMQ(Configuration);
             // Register Autofac
             var serviceProvider = services.AddMonacoAutoFac(Configuration);
 

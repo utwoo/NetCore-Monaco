@@ -1,6 +1,6 @@
 ﻿using MassTransit;
 
-namespace Monaco.Core.EventPublishers
+namespace Monaco.Core.EventPublisher
 {
     public class RabbitMQEventPublisher : IEventPublisher
     {

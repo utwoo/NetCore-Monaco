@@ -3,7 +3,7 @@ using Monaco.Data.Core.Repository;
 
 namespace Monaco.Data.Core.Settings
 {
-    public class AutofacSetting : Module
+    public class AutofacModule : Module
     {
         protected override void Load(ContainerBuilder builder)
         {
