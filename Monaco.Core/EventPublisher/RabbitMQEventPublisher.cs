@@ -2,6 +2,9 @@
 
 namespace Monaco.Core.EventPublisher
 {
+    /// <summary>
+    /// Event Publisher for RabbitMQ
+    /// </summary>
     public class RabbitMQEventPublisher : IEventPublisher
     {
         // MassTransit bus control

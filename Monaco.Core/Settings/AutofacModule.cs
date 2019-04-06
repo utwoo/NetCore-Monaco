@@ -1,8 +1,4 @@
-﻿using System;
-using Autofac;
-using MassTransit;
-using MassTransit.AutofacIntegration;
-using Monaco.Core.EventPublisher;
+﻿using Autofac;
 
 namespace Monaco.Core.Settings
 {
@@ -10,8 +6,6 @@ namespace Monaco.Core.Settings
     {
         protected override void Load(ContainerBuilder builder)
         {
-            // Event Publisher
-            builder.RegisterType<RabbitMQEventPublisher>().As<IEventPublisher>().InstancePerLifetimeScope();
         }
     }
 }

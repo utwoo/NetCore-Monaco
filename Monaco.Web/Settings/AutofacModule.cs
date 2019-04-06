@@ -9,6 +9,7 @@ namespace Monaco.Web.Settings
         {
             // Register event consumers
             builder.RegisterType<SampleConsumer>().InstancePerLifetimeScope();
+            builder.RegisterType<SampleConsumer2>().InstancePerLifetimeScope();
         }
     }
 }

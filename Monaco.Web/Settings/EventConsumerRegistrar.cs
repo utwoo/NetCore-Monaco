@@ -10,12 +10,13 @@ namespace Monaco.Web.Settings
     {
         public int Order => 0;
 
-        public void RegisterEventConsumers(IRabbitMqBusFactoryConfigurator configuration, IRabbitMqHost host, IComponentContext context)
+        public void RegisterEventConsumers(IRabbitMqBusFactoryConfigurator configuration, IComponentContext context)
         {
-            configuration.ReceiveEndpoint(host, "sample.test", e =>
-            {
-                e.Consumer<SampleConsumer>(context);
-            });
+            configuration.ReceiveEndpoint("sample.test", e =>
+           {
+               e.Consumer<SampleConsumer>(context);
+               e.Consumer<SampleConsumer2>(context);
+           });
         }
     }
 }
