@@ -4,6 +4,7 @@ using AutoMapper;
 using MassTransit;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Monaco.Core.Caching;
 using Monaco.Core.EventPublisher;
 using Monaco.Data.Core.DbContexts;
 using Monaco.Data.Core.Repository;
@@ -21,19 +22,22 @@ namespace Monaco.Web.Controllers
         private readonly MonacoDbContext _context;
         private readonly IMapper _mapper;
         private readonly IEventPublisher _eventPublisher;
+        private readonly ICacheManager _cacheManager;
 
         public ValuesController(
         IRepository<Class> @class,
         ILogger<ValuesController> logger,
         MonacoDbContext context,
         IMapper mapper,
-        IEventPublisher eventPublisher)
+        IEventPublisher eventPublisher,
+        ICacheManager cacheManager)
         {
             this._class = @class;
             this._logger = logger;
             this._context = context;
             this._mapper = mapper;
             this._eventPublisher = eventPublisher;
+            this._cacheManager = cacheManager;
         }
 
         // GET api/values
@@ -55,7 +59,9 @@ namespace Monaco.Web.Controllers
         {
             var sample = new Sample() { Value = 11 };
             this._eventPublisher.Publish(sample);
-            return _mapper.Map<Sample, SampleDTO>(sample);
+
+            _cacheManager.Set("sample", sample, 0);
+            return _mapper.Map<Sample, SampleDTO>(_cacheManager.Get("sample", () => new Sample()));
         }
 
         // POST api/values

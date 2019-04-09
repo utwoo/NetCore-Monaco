@@ -23,7 +23,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Monaco.Web", "Monaco.Web\Mo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Monaco.Data", "Monaco.Data\Monaco.Data.csproj", "{CBA2030E-C266-4A91-B407-78C888017F8B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Monaco.Domain", "Monaco.Domain\Monaco.Domain.csproj", "{1A12C24F-119A-41D5-9AD7-8041F0814871}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Monaco.Domain", "Monaco.Domain\Monaco.Domain.csproj", "{1A12C24F-119A-41D5-9AD7-8041F0814871}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
