@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Monaco.Core.Caching;
 using Monaco.Core.Infrastructure.Extensions;
 using Monaco.Data.Core.Infrastructure.Extensions;
 
@@ -23,6 +24,9 @@ namespace Monaco.WebAPI
         {
             // Register HttpContext Accessor
             services.AddHttpContextAccessor();
+
+            // TODO: Register [RedLock] Configurations
+            services.Configure<RedLockConfiguration>(Configuration.GetSection("RedLock"));
 
             // Register AutoMapper
             services.AddMonacoMapper();

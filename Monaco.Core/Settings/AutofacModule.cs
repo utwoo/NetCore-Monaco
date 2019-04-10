@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using Monaco.Core.Caching;
 
 namespace Monaco.Core.Settings
 {
@@ -6,6 +7,8 @@ namespace Monaco.Core.Settings
     {
         protected override void Load(ContainerBuilder builder)
         {
+            // Register lock
+            builder.RegisterType<RedLockManager>().As<ILockManager>().SingleInstance();
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading;
 using System.Transactions;
 using AutoMapper;
 using MassTransit;
@@ -23,6 +25,7 @@ namespace Monaco.Web.Controllers
         private readonly IMapper _mapper;
         private readonly IEventPublisher _eventPublisher;
         private readonly ICacheManager _cacheManager;
+        private readonly ILockManager _lockManager;
 
         public ValuesController(
         IRepository<Class> @class,
@@ -30,7 +33,8 @@ namespace Monaco.Web.Controllers
         MonacoDbContext context,
         IMapper mapper,
         IEventPublisher eventPublisher,
-        ICacheManager cacheManager)
+        ICacheManager cacheManager,
+        ILockManager lockManager)
         {
             this._class = @class;
             this._logger = logger;
@@ -38,6 +42,7 @@ namespace Monaco.Web.Controllers
             this._mapper = mapper;
             this._eventPublisher = eventPublisher;
             this._cacheManager = cacheManager;
+            this._lockManager = lockManager;
         }
 
         // GET api/values
@@ -57,6 +62,12 @@ namespace Monaco.Web.Controllers
         [HttpGet("{id}")]
         public ActionResult<SampleDTO> Get(int id)
         {
+            using (_lockManager.AcquireLock("temp", TimeSpan.FromSeconds(30)))
+            {
+                Console.WriteLine("111");
+                Thread.Sleep(15 * 1000);
+            }
+
             var sample = new Sample() { Value = 11 };
             this._eventPublisher.Publish(sample);
 
