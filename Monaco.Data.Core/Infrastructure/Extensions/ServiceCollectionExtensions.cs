@@ -14,12 +14,12 @@ namespace Monaco.Data.Core.Infrastructure.Extensions
         /// Register database context
         /// </summary>
         /// <param name="services">Collection of service descriptors</param>
-        public static void AddMonacoDbContext(this IServiceCollection services, MonacoConfiguration configuration)
+        public static void AddMonacoDbContext(this IServiceCollection services)
         {
             // Register database context from application configuration
             services.AddDbContext<MonacoDbContext>(optionsBuilder =>
             {
-                optionsBuilder.UseNpgsql(configuration.DataConfig.ConnectionString);
+                optionsBuilder.UseNpgsql(MonacoConfiguration.Instance.DataConfig.ConnectionString);
             });
         }
     }

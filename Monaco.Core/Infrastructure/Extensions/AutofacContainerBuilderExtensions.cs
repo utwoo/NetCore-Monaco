@@ -15,8 +15,7 @@ namespace Monaco.Core.Infrastructure.Extensions
         /// Register RabbitMQ Components in Autofac container
         /// </summary>
         /// <param name="builder">Container builder</param>
-        /// <param name="configuration">application configuration</param>
-        public static void RegisterRabbitMQComponents(this ContainerBuilder builder, MonacoConfiguration configuration)
+        public static void RegisterRabbitMQComponents(this ContainerBuilder builder)
         {
             // Register Event Publisher
             builder.RegisterType<RabbitMQEventPublisher>().As<IEventPublisher>().InstancePerLifetimeScope();
@@ -29,15 +28,15 @@ namespace Monaco.Core.Infrastructure.Extensions
                     var bus = Bus.Factory.CreateUsingRabbitMq(busConfiguration =>
                     {
                         // Create host through application configurations
-                        var host = busConfiguration.Host(new Uri(configuration.RabbitMQConfig.Server), hostConfiguration =>
+                        var host = busConfiguration.Host(new Uri(MonacoConfiguration.Instance.RabbitMQConfig.Server), hostConfiguration =>
                          {
-                             hostConfiguration.Username(configuration.RabbitMQConfig.Username);
-                             hostConfiguration.Password(configuration.RabbitMQConfig.Password);
+                             hostConfiguration.Username(MonacoConfiguration.Instance.RabbitMQConfig.Username);
+                             hostConfiguration.Password(MonacoConfiguration.Instance.RabbitMQConfig.Password);
                          });
 
-                        // Recieve Event Consumers Setting Types
+                        // Receive Event Consumers Setting Types
                         var rabbitEventConsumersSettings =
-                             configuration.AutofacConfig.LoadAssemblies
+                             MonacoConfiguration.Instance.AutofacConfig.LoadAssemblies
                              .Split(';')
                              .Select(assemblyName =>
                              {

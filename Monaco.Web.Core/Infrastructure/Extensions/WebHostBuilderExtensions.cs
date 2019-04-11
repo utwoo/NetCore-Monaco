@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Hosting;
+using Monaco.Core.Configurations;
 using Serilog;
 
 namespace Monaco.Web.Core.Infrastructure.Extensions

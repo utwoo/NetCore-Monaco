@@ -24,21 +24,20 @@ namespace Monaco.Core.Infrastructure.Extensions
         /// Register Autofac IOC container 
         /// </summary>
         /// <param name="services">Collection of service descriptors</param>
-        /// <param name="configuration">Application configuration</param>
-        public static IServiceProvider AddMonacoAutoFac(this IServiceCollection services, MonacoConfiguration configuration)
+        public static IServiceProvider AddMonacoAutoFac(this IServiceCollection services)
         {
             // Create the container builder.
             var builder = new ContainerBuilder();
             // Read Assemblies for Autofac from configuration
             var assemblies =
-                configuration.AutofacConfig.LoadAssemblies
+                MonacoConfiguration.Instance.AutofacConfig.LoadAssemblies
                     .Split(';')
                     .Select(assemblyName => Assembly.Load(assemblyName))
                     .ToArray();
             // Register Autofac modules
             builder.RegisterAssemblyModules(assemblies);
             // Register RabbitMQ Components
-            builder.RegisterRabbitMQComponents(configuration);
+            builder.RegisterRabbitMQComponents();
             // Populate MVC services to Autofac container build
             builder.Populate(services);
             // Create container and return provider 
@@ -74,8 +73,6 @@ namespace Monaco.Core.Infrastructure.Extensions
             var config = new TConfig();
             //bind it to the appropriate section of configuration
             configuration.Bind(config);
-            //and register it as a service
-            services.AddSingleton(config);
 
             return config;
         }
@@ -85,32 +82,26 @@ namespace Monaco.Core.Infrastructure.Extensions
         /// </summary>
         /// <param name="services">Collection of service descriptors</param>
         /// <param name="configuration">Set of key/value application configuration properties</param>
-        /// <returns>Monaco Configurations</returns>
-        public static MonacoConfiguration InitializeConfigurations(this IServiceCollection services, IConfiguration configuration)
+        public static void InitializeConfigurations(this IServiceCollection services, IConfiguration configuration)
         {
             if (services == null)
                 throw new ArgumentNullException(nameof(services));
 
             if (configuration == null)
                 throw new ArgumentNullException(nameof(configuration));
-
-            var config = new MonacoConfiguration
-            {
-                // TODO: Register [Autofac] Configurations
-                DataConfig = services.BindConfiguration<DataConfiguration>(configuration.GetSection("Data")),
-                // TODO: Register [Autofac] Configurations
-                AutofacConfig = services.BindConfiguration<AutofacConfiguration>(configuration.GetSection("Autofac")),
-                // TODO: Register [RedLock] Configurations
-                RedLockConfig = services.BindConfiguration<RedLockConfiguration>(configuration.GetSection("RedLock")),
-                // TODO: Register [Caching] Configurations
-                CachingConfig = services.BindConfiguration<CachingConfiguration>(configuration.GetSection("Caching")),
-                // TODO: Register [RabbitMQ] Configurations
-                RabbitMQConfig = services.BindConfiguration<RabbitMQConfiguration>(configuration.GetSection("RabbitMQ")),
-                // TODO: Register [SEQ] Configurations
-                SEQConfig = services.BindConfiguration<SEQConfiguration>(configuration.GetSection("SEQ"))
-            };
-
-            return config;
+            
+            // TODO: Register [Autofac] Configurations
+            MonacoConfiguration.Instance.DataConfig = services.BindConfiguration<DataConfiguration>(configuration.GetSection("Data"));
+            // TODO: Register [Autofac] Configurations
+            MonacoConfiguration.Instance.AutofacConfig = services.BindConfiguration<AutofacConfiguration>(configuration.GetSection("Autofac"));
+            // TODO: Register [RedLock] Configurations
+            MonacoConfiguration.Instance.RedLockConfig = services.BindConfiguration<RedLockConfiguration>(configuration.GetSection("RedLock"));
+            // TODO: Register [Caching] Configurations
+            MonacoConfiguration.Instance.CachingConfig = services.BindConfiguration<CachingConfiguration>(configuration.GetSection("Caching"));
+            // TODO: Register [RabbitMQ] Configurations
+            MonacoConfiguration.Instance.RabbitMQConfig = services.BindConfiguration<RabbitMQConfiguration>(configuration.GetSection("RabbitMQ"));
+            // TODO: Register [SEQ] Configurations
+            MonacoConfiguration.Instance.SEQConfig = services.BindConfiguration<SEQConfiguration>(configuration.GetSection("SEQ"));
         }
     }
 }

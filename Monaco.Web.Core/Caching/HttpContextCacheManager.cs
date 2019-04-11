@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Options;
 using Monaco.Core.Caching;
 using Monaco.Core.ComponentModel;
+using Monaco.Core.Configurations;
 
 namespace Monaco.Web.Core.Caching
 {
@@ -15,16 +14,13 @@ namespace Monaco.Web.Core.Caching
     {
         private readonly ReaderWriterLockSlim _locker;
         private readonly IHttpContextAccessor _httpContextAccessor;
-        private readonly CachingConfiguration _configuration;
 
         public HttpContextCacheManager(
-            IHttpContextAccessor httpContextAccessor,
-            CachingConfiguration configuration
+            IHttpContextAccessor httpContextAccessor
             )
         {
             this._locker = new ReaderWriterLockSlim();
             this._httpContextAccessor = httpContextAccessor;
-            this._configuration = configuration;
         }
 
         protected virtual IDictionary<object, object> GetCacheItems()
@@ -50,7 +46,7 @@ namespace Monaco.Web.Core.Caching
             //or create it using passed function
             var result = acquire();
 
-            if (result == null || (cacheTime ?? Convert.ToInt32(_configuration.DefaultCacheTime)) <= 0)
+            if (result == null || (cacheTime ?? Convert.ToInt32(MonacoConfiguration.Instance.CachingConfig.DefaultCacheTime)) <= 0)
                 return result;
 
             //and set in cache (if cache time is defined)

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.Extensions.Options;
+using Monaco.Core.Configurations;
 using RedLockNet;
 using RedLockNet.SERedis;
 using RedLockNet.SERedis.Configuration;
@@ -13,14 +14,10 @@ namespace Monaco.Core.Caching
     /// </summary>
     public class RedLockManager : ILockManager
     {
-        private readonly RedLockConfiguration _configuration;
-
         private RedLockFactory _redisLockFactory => CreateRedisLockFactory();
 
-        public RedLockManager(
-            RedLockConfiguration configuration)
+        public RedLockManager()
         {
-            this._configuration = configuration;
         }
 
         /// <summary>
@@ -43,7 +40,7 @@ namespace Monaco.Core.Caching
         protected RedLockFactory CreateRedisLockFactory()
         {
             //get RedLock endpoints configurations
-            var configurationOptions = ConfigurationOptions.Parse(_configuration.EndPoints);
+            var configurationOptions = ConfigurationOptions.Parse(MonacoConfiguration.Instance.RedLockConfig.EndPoints);
             //get RedLock endpoints
             List<RedLockEndPoint> redLockEndPoints = new List<RedLockEndPoint>();
             foreach (var endpoint in configurationOptions.EndPoints)

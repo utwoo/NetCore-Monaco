@@ -8,11 +8,15 @@ namespace Monaco.Core.Configurations
 {
     public class MonacoConfiguration
     {
-        public DataConfiguration DataConfig { get; set; }
-        public AutofacConfiguration AutofacConfig { get; set; }
-        public RedLockConfiguration RedLockConfig { get; set; }
-        public CachingConfiguration CachingConfig { get; set; }
-        public RabbitMQConfiguration RabbitMQConfig { get; set; }
-        public SEQConfiguration SEQConfig { get; set; }
+        private MonacoConfiguration() { }
+
+        public readonly static MonacoConfiguration Instance = new MonacoConfiguration();
+
+        public DataConfiguration DataConfig { get; internal set; }
+        public AutofacConfiguration AutofacConfig { get; internal set; }
+        public RedLockConfiguration RedLockConfig { get; internal set; }
+        public CachingConfiguration CachingConfig { get; internal set; }
+        public RabbitMQConfiguration RabbitMQConfig { get; internal set; }
+        public SEQConfiguration SEQConfig { get; internal set; }
     }
 }
