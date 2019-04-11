@@ -4,8 +4,11 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Monaco.Core.Autofac;
 using Monaco.Core.Caching;
 using Monaco.Core.Infrastructure.Extensions;
+using Monaco.Core.MessageQueue;
+using Monaco.Core.SEQ;
 using Monaco.Data.Core.Infrastructure.Extensions;
 
 namespace Monaco.WebAPI
@@ -22,20 +25,18 @@ namespace Monaco.WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
+            // Initialize Configurations
+            var monacoConfig = services.InitializeConfigurations(Configuration);
             // Register HttpContext Accessor
             services.AddHttpContextAccessor();
-
-            // TODO: Register [RedLock] Configurations
-            services.Configure<RedLockConfiguration>(Configuration.GetSection("RedLock"));
-
             // Register AutoMapper
             services.AddMonacoMapper();
             // Register DataBase Context
-            services.AddMonacoDbContext(Configuration);
+            services.AddMonacoDbContext(monacoConfig);
             // Register MVC
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             // Register Autofac
-            var serviceProvider = services.AddMonacoAutoFac(Configuration);
+            var serviceProvider = services.AddMonacoAutoFac(monacoConfig);
 
             return serviceProvider;
         }

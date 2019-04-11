@@ -18,9 +18,9 @@ namespace Monaco.Core.Caching
         private RedLockFactory _redisLockFactory => CreateRedisLockFactory();
 
         public RedLockManager(
-            IOptions<RedLockConfiguration> configuration)
+            RedLockConfiguration configuration)
         {
-            this._configuration = configuration.Value;
+            this._configuration = configuration;
         }
 
         /// <summary>

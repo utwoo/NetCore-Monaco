@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Transactions;
 using AutoMapper;
-using MassTransit;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Monaco.Core.Caching;

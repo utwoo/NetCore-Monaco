@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Monaco.Core.Configurations;
 using Monaco.Data.Core.DbContexts;
 
 namespace Monaco.Data.Core.Infrastructure.Extensions
@@ -14,12 +14,12 @@ namespace Monaco.Data.Core.Infrastructure.Extensions
         /// Register database context
         /// </summary>
         /// <param name="services">Collection of service descriptors</param>
-        public static void AddMonacoDbContext(this IServiceCollection services, IConfiguration configuration)
+        public static void AddMonacoDbContext(this IServiceCollection services, MonacoConfiguration configuration)
         {
             // Register database context from application configuration
             services.AddDbContext<MonacoDbContext>(optionsBuilder =>
             {
-                optionsBuilder.UseNpgsql(configuration["Data:ConnectionString"]);
+                optionsBuilder.UseNpgsql(configuration.DataConfig.ConnectionString);
             });
         }
     }

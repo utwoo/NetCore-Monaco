@@ -5,6 +5,7 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 using Monaco.Core.Caching;
 using Monaco.Core.ComponentModel;
 
@@ -14,11 +15,11 @@ namespace Monaco.Web.Core.Caching
     {
         private readonly ReaderWriterLockSlim _locker;
         private readonly IHttpContextAccessor _httpContextAccessor;
-        private readonly IConfiguration _configuration;
+        private readonly CachingConfiguration _configuration;
 
         public HttpContextCacheManager(
             IHttpContextAccessor httpContextAccessor,
-            IConfiguration configuration
+            CachingConfiguration configuration
             )
         {
             this._locker = new ReaderWriterLockSlim();
@@ -49,7 +50,7 @@ namespace Monaco.Web.Core.Caching
             //or create it using passed function
             var result = acquire();
 
-            if (result == null || (cacheTime ?? Convert.ToInt32(_configuration["Caching:DefaultCacheTime"])) <= 0)
+            if (result == null || (cacheTime ?? Convert.ToInt32(_configuration.DefaultCacheTime)) <= 0)
                 return result;
 
             //and set in cache (if cache time is defined)
