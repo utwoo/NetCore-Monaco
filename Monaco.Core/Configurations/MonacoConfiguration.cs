@@ -18,5 +18,6 @@ namespace Monaco.Core.Configurations
         public CachingConfiguration CachingConfig { get; internal set; }
         public RabbitMQConfiguration RabbitMQConfig { get; internal set; }
         public SEQConfiguration SEQConfig { get; internal set; }
+        public RedisConfiguration RedisConfig { get; internal set; }
     }
 }

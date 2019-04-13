@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Microsoft.Extensions.Options;
 using Monaco.Core.Configurations;
 using RedLockNet;
 using RedLockNet.SERedis;
@@ -12,7 +11,7 @@ namespace Monaco.Core.Caching
     /// <summary>
     /// RedLock Lock Manager
     /// </summary>
-    public class RedLockManager : ILockManager
+    public class RedLockManager : ILockManager, IDisposable
     {
         private RedLockFactory _redisLockFactory => CreateRedisLockFactory();
 
@@ -58,6 +57,11 @@ namespace Monaco.Core.Caching
             }
             //create RedLock factory to use RedLock distributed lock algorithm
             return RedLockFactory.Create(redLockEndPoints);
+        }
+
+        public void Dispose()
+        {
+            this._redisLockFactory?.Dispose();
         }
     }
 }

@@ -10,7 +10,7 @@ using Monaco.Core.Configurations;
 
 namespace Monaco.Web.Core.Caching
 {
-    public class HttpContextCacheManager : ICacheManager
+    public class HttpContextCacheManager : ILocalCacheManager
     {
         private readonly ReaderWriterLockSlim _locker;
         private readonly IHttpContextAccessor _httpContextAccessor;

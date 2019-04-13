@@ -9,7 +9,7 @@ namespace Monaco.Web.Core.Settings
         protected override void Load(ContainerBuilder builder)
         {
             //cache manager
-            builder.RegisterType<HttpContextCacheManager>().As<ICacheManager>().InstancePerLifetimeScope();
+            builder.RegisterType<HttpContextCacheManager>().As<ILocalCacheManager>().InstancePerLifetimeScope();
         }
     }
 }

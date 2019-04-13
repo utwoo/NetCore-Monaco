@@ -11,7 +11,7 @@ namespace Monaco.WebAPI
             var host = WebHost.CreateDefaultBuilder(args)
                 .UseKestrel(options => options.AddServerHeader = false)
                 .UseStartup<Startup>()
-                .UseMonacoSerilog(SerilogType.ColoredConsole | SerilogType.ElasticSearch | SerilogType.SEQ)
+                .UseMonacoSerilog(SerilogType.ColoredConsole)
                 .Build();
 
             host.Run();

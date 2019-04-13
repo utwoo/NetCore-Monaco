@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading;
+using System.Threading.Tasks;
 using System.Transactions;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
@@ -23,7 +23,7 @@ namespace Monaco.Web.Controllers
         private readonly MonacoDbContext _context;
         private readonly IMapper _mapper;
         private readonly IEventPublisher _eventPublisher;
-        private readonly ICacheManager _cacheManager;
+        private readonly IRemoteCacheManager _cacheManager;
         private readonly ILockManager _lockManager;
 
         public ValuesController(
@@ -32,7 +32,7 @@ namespace Monaco.Web.Controllers
         MonacoDbContext context,
         IMapper mapper,
         IEventPublisher eventPublisher,
-        ICacheManager cacheManager,
+        IRemoteCacheManager cacheManager,
         ILockManager lockManager)
         {
             this._class = @class;
@@ -64,14 +64,15 @@ namespace Monaco.Web.Controllers
             using (_lockManager.AcquireLock("temp", TimeSpan.FromSeconds(30)))
             {
                 Console.WriteLine("111");
-                Thread.Sleep(15 * 1000);
+                //Thread.Sleep(15 * 1000);
             }
 
             var sample = new Sample() { Value = 11 };
-            this._eventPublisher.Publish(sample);
+            //this._eventPublisher.Publish(sample);
 
-            _cacheManager.Set("sample", sample, 0);
-            return _mapper.Map<Sample, SampleDTO>(_cacheManager.Get("sample", () => new Sample()));
+            //_logger.LogWarning("{@sample}", sample);
+            _cacheManager.SetAsync<Sample>("sample", sample, 60);
+            return _mapper.Map<Sample, SampleDTO>(_cacheManager.GetAsync("sample", () => Task.FromResult(new Sample())).Result);
         }
 
         // POST api/values

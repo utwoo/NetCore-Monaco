@@ -89,7 +89,7 @@ namespace Monaco.Core.Infrastructure.Extensions
 
             if (configuration == null)
                 throw new ArgumentNullException(nameof(configuration));
-            
+
             // TODO: Register [Autofac] Configurations
             MonacoConfiguration.Instance.DataConfig = services.BindConfiguration<DataConfiguration>(configuration.GetSection("Data"));
             // TODO: Register [Autofac] Configurations
@@ -102,6 +102,8 @@ namespace Monaco.Core.Infrastructure.Extensions
             MonacoConfiguration.Instance.RabbitMQConfig = services.BindConfiguration<RabbitMQConfiguration>(configuration.GetSection("RabbitMQ"));
             // TODO: Register [SEQ] Configurations
             MonacoConfiguration.Instance.SEQConfig = services.BindConfiguration<SEQConfiguration>(configuration.GetSection("SEQ"));
+            // TODO: Register [Redis] Configurations
+            MonacoConfiguration.Instance.RedisConfig = services.BindConfiguration<RedisConfiguration>(configuration.GetSection("Redis"));
         }
     }
 }

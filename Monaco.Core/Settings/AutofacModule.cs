@@ -9,6 +9,9 @@ namespace Monaco.Core.Settings
         {
             // Register lock
             builder.RegisterType<RedLockManager>().As<ILockManager>().SingleInstance();
+            // Register Redis
+            builder.RegisterType<RedisConnectionManager>().SingleInstance();
+            builder.RegisterType<RedisCacheManager>().As<IRemoteCacheManager>().InstancePerLifetimeScope();
         }
     }
 }
